@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+<div class="vertical">
+    <div class="vertical-item vertical-item1">item1</div>
+    <div class="vertical-item vertical-item2">item2</div>
+    <div class="vertical-item vertical-item3">item3</div>
+    <div class="vertical-item vertical-item4">item4</div>
+</div>
+<br/>
+<div class="flex">
+    <div class="flex-item flex-item1">item1</div>
+    <div class="flex-item flex-item2">item2</div>
+    <div class="flex-item flex-item3">item3</div>
+    <div class="flex-item flex-item4">item4</div>
+</div>
+
+<div class="margin">
+    <div class="margin-item"></div>
+    <div class="margin-item"></div>
+</div>
+
+
+<div class="block1">
+    block1
+    <div class="block2">
+        block2
+        <div class="block-item block-item1">item1</div>
+        <div class="block-item block-item2">item2</div>
+        <div class="block-item block-item3">item3</div>
+    </div>
+</div>
+
+<div class="float">
+    <div class="float-item">float</div>
+</div>
+<br />
+<div class="container">
+    <div class="left">left</div>
+    <div class="right">right</div>
+</div>
+</body>
+</html>
+
+<style>
+    .vertical {
+        height: auto;
+        background: gray;
+        overflow: auto;
+    }
+
+    .vertical-item {
+        height: 30px;
+        opacity: 0.5;
+        text-align: center;
+    }
+
+    .vertical-item1 {
+        width: 200px;
+        background: deepskyblue;
+        float: left;
+    }
+
+    .vertical-item2 {
+        width: 100px;
+        background: yellow;
+        position: absolute;
+    }
+
+    .vertical-item3 {
+        width: 300px;
+        background: pink;
+    }
+
+    .vertical-item4 {
+        width: 400px;
+        background: brown;
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: column;
+        background: gray;
+    }
+
+    .flex-item {
+        height: 30px;
+        opacity: 0.5;
+        text-align: center;
+    }
+
+    .flex-item1 {
+        width: 200px;
+        background: deepskyblue;
+        float: left;
+    }
+
+    .flex-item2 {
+        width: 100px;
+        background: yellow;
+        position: absolute;
+    }
+
+    .flex-item3 {
+        width: 300px;
+        background: pink;
+    }
+
+    .flex-item4 {
+        width: 400px;
+        background: brown;
+    }
+    .margin{
+        overflow: auto;
+    }
+    .margin-item{
+        margin:20px;
+        background-color: red;
+        width: 50px;
+        height: 50px;
+    }
+    .block1{
+        overflow: hidden;
+        background-color: gray;
+        position: relative;
+        height: 200px;
+        padding-top: 50px;
+        margin: 10px;
+        border: 5px solid black;
+    }
+    .block2{
+        overflow: hidden;
+        background-color: aliceblue;
+        height: 150px;
+        margin: 10px;
+    }
+    .block-item{
+        width: 50px;
+        height: 50px;
+    }
+    .block-item1{
+        top: 0;
+        position: absolute;
+        background-color: red;
+    }
+    .block-item2{
+        background-color: deepskyblue;
+        float: left;
+    }
+    .block-item3{
+        background-color: yellow;
+    }
+    .float{
+        overflow: hidden;
+        background-color: gray;
+        border: 1px solid black;
+    }
+    .float-item{
+        float: left;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+    }
+    .container{
+        background-color: gray;
+    }
+    .left{
+        float: left;
+        background-color: red;
+        width: 50px;
+    }
+    .right{
+        overflow: hidden;
+        height: 200px;
+        background-color: deepskyblue;
+    }
+</style>
