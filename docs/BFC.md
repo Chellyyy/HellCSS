@@ -1,4 +1,4 @@
-#BFC  
+# BFC  
 块格式化上下文（Block Formatting Context，BFC） 是Web页面的可视CSS渲染的一部分，是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域。
 
 ```
@@ -6,13 +6,13 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。
 ```
 
-###扩展 Box和Formatting Context
+### 扩展 Box和Formatting Context
 **Box：css布局的基本单位**  
 **Formatting Context：是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。  
 最常见的 Formatting context 有 Block formatting context (简称BFC)和 Inline formatting context (简称IFC)**
 
 
-###如何创建BFC
+### 如何创建BFC
 * 根元素或其它包含它的元素
 * 浮动 (元素的float不为none)
 * 绝对定位元素 (元素的position为absolute或fixed)
@@ -22,7 +22,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 * 弹性盒 flex boxes (元素的display: flex或inline-flex)  
 [Introduction to formatting contexts 格式化上下文简介](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts)
 
-##BFC的规则
+## BFC的规则
 * 内部的Box会在垂直方向，一个接一个地放置  
 其实这个不难理解，就是一个BFC内部的元素，如果不指定特殊样式，会一个一个垂直排列。  
 有点类似于flex布局中的column排列，来看两个例子  
@@ -244,13 +244,13 @@ flex布局中，由于容器设置了display:flex，会导致子元素的float�
 * BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。  
 上面的例子都说明了这一点，所以BFC在日常布局中还是十分有用的。
 
-###总结
+### 总结
 BFC可以用来  
 * 避免margin重叠
 * 清除浮动
 * 阻止元素被浮动元素覆盖
 
-###扩展 清除浮动常用的办法
+### 扩展 清除浮动常用的办法
 * 在最后一个浮动元素后面添加一个标签（或后一个邻接元素），添加属性clear:both 这个方法会多一个无意义的标签
 * 容器添加浮动 这个方法不利于布局
 * 父元素添加overflow:hidden触发BFC 容易有溢出隐藏问题
@@ -267,11 +267,11 @@ BFC可以用来
     *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
 }
 ```
-###参考资料
+### 参考资料
 [什么是BFC？看这一篇就够了](https://blog.csdn.net/sinat_36422236/article/details/88763187)  
 [关于BFC的特征，为什么说内部的box会在垂直方向一个接一个放置？](https://segmentfault.com/q/1010000008875016)  
 [Introduction to formatting contexts 格式化上下文简介](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flow_Layout/Intro_to_formatting_contexts)  
 [布局和包含块](https://developer.mozilla.org/zh-CN/docs/Web/CSS/All_About_The_Containing_Block)  
 
-###Demo
+### Demo
 [demo地址](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/index.html)

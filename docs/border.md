@@ -1,5 +1,4 @@
 # Border
----
 
 我平常border写得最多的样式就是
 ```
@@ -10,7 +9,7 @@
 这就能看出来border其实是三个属性的简写，分别是 border-width、border-style、border-color。
 这三个属性都与方向有关，所以可以分开按照方向写，也可以简写。
 
-##简写快速记忆
+## 简写快速记忆
 * 方向记忆：顺序为上右下左，也可以按照从上开始顺时针的方向进行记忆
 ```
         top
@@ -26,12 +25,12 @@
         border-width:5px 10px 15px 20px; /*四个值，按照方向记忆，上5px，右10px，下15px，左20px*/
     }
 ```
-##实践1实现一个三角形
+## 实践1实现一个三角形
 实现三角形的原理很简单，我们先了解一下基础知识，CSS盒模型  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/border/box.png?raw=true)  
 
 一个盒子包括: margin+border+padding+content
-###扩展
+### 扩展
 盒子宽度高度的计算由CSS的属性box-sizing控制  
 `content-box`默认值，盒子的宽高=width(content)+padding+border设置border和padding不影响content的宽高  
 `border-box`IE盒子模型，盒子的宽高=width(padding+border+content)，在设置了宽高后，如果修改了border和padding，content的宽高会受影响
