@@ -110,7 +110,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
     }
 </style>
 ```
-效果如下图所示
+效果如下图所示  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/1.png?raw=true)  
 蓝色框：item1，黄色框：item2，粉色框item3，红色框item4，为了便于看清重叠，他们都是半透明的。  
 先看第一个容器，在同一个BFC中，item1和item2都脱离了文档流，所以他们和item3重叠到了一块，导致三个区域都在一行。item4独占一行。
@@ -147,9 +147,9 @@ flex布局中，由于容器设置了display:flex，会导致子元素的float�
     block1
     <div class="block2">
         block2
-        <div class="block-item block-item1"></div>
-        <div class="block-item block-item2"></div>
-        <div class="block-item block-item3"></div>
+        <div class="block-item block-item1">item1</div>
+        <div class="block-item block-item2">item2</div>
+        <div class="block-item block-item3">item3</div>
     </div>
 </div>
 <style>
@@ -186,7 +186,7 @@ flex布局中，由于容器设置了display:flex，会导致子元素的float�
     }
 </style>
 ```
-效果如下图
+效果如下图  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/3.png?raw=true)  
 在这个例子中，block1和block2都是独立的BFC，但是由于item1的position是absolute，所以他与第一个position属性不为static的包含块的左边相接触。  
 猜测这也是absolute为什么相对于第一个position不为static的父类定位的原因。 
@@ -210,9 +210,9 @@ flex布局中，由于容器设置了display:flex，会导致子元素的float�
     }
 </style>
 ```
-当容器未设置overflow时，效果如下图
+当容器未设置overflow时，效果如下图  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/4.png?raw=true)  
-设置了overflow时，效果如下图，所以这个用法也经常被用来 清除浮动
+设置了overflow时，效果如下图，所以这个用法也经常被用来 清除浮动  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/5.png?raw=true)  
 * BFC的区域不会与float box重叠。
 ```
@@ -236,9 +236,9 @@ flex布局中，由于容器设置了display:flex，会导致子元素的float�
     }
 </style>
 ```
-不设置overflow时，效果如下图
+不设置overflow时，效果如下图  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/6.png?raw=true)  
-设置了overflow时，效果如下图，可以实现一个 自适应两栏布局
+设置了overflow时，效果如下图，可以实现一个 自适应两栏布局  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/7.png?raw=true)  
 
 * BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。  
