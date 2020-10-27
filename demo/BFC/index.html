@@ -7,6 +7,7 @@
 
 </head>
 <body>
+<h2>内部的Box会在垂直方向，一个接一个地放置</h2>
 <div class="vertical">
     <div class="vertical-item vertical-item1">item1</div>
     <div class="vertical-item vertical-item2">item2</div>
@@ -20,13 +21,13 @@
     <div class="flex-item flex-item3">item3</div>
     <div class="flex-item flex-item4">item4</div>
 </div>
-
+<h2>一个BFC的两个相邻 Box 的 margin 会发生重叠</h2>
 <div class="margin">
     <div class="margin-item"></div>
     <div class="margin-item"></div>
 </div>
 
-
+<h2>每个盒子（块盒与行盒）的margin box的左边，与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此</h2>
 <div class="block1">
     block1
     <div class="block2">
@@ -36,11 +37,11 @@
         <div class="block-item block-item3">item3</div>
     </div>
 </div>
-
+<h2>计算BFC的高度时，浮动元素也参与计算</h2>
 <div class="float">
     <div class="float-item">float</div>
 </div>
-<br />
+<h2>BFC的区域不会与float box重叠</h2>
 <div class="container">
     <div class="left">left</div>
     <div class="right">right</div>

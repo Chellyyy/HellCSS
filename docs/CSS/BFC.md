@@ -137,6 +137,16 @@ flex布局中，由于容器设置了display:flex，会导致子元素的float�
 效果如下图  
 ![image](https://github.com/Chellyyy/HelloCSS/blob/master/demo/BFC/2.png?raw=true)  
 两个div都设置了margin，但是两个div垂直方向的margin重叠了  
+### 扩展 [margin重叠问题](https://github.com/Chellyyy/HelloCSS/blob/master/docs/CSS/margin-collapse.md)
+
+```html
+<div class="margin">
+    <div class="margin-item"></div>
+    <div  style="overflow: hidden">
+        <div class="margin-item"></div>
+    </div>
+</div>
+```
 
 * 每个盒子（块盒与行盒）的margin box的左边，与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。  
 要理解这一点，我们得先搞清除，包含块是什么。  
