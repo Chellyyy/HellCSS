@@ -5,34 +5,141 @@
   <title>Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-  .margin{
-    overflow: auto;
+  .BFC{
+    display: flow-root;
   }
-  .margin-item{
+  .margin{
     margin:20px;
+  }
+  .red{
     background-color: red;
+  }
+  .green{
+    background-color: green;
+  }
+  .blue{
+    background-color: blue;
+  }
+  .big-box{
+    width: 100px;
+    height: 100px;
+  }
+  .middle-box{
     width: 50px;
     height: 50px;
+  }
+  .relative{
+    /*修正absolute定位影响*/
+    position: relative;
+    height: 200px;
+  }
+  .before::before{
+    content: '';
+    display: inline-block;
+  }
+  .after::after{
+    content: '';
+    display: inline-block;
+  }
+  .auto-box{
+    width: 100px;
+    height: auto;
+  }
+  .none{
+    height: auto;
+    min-height: 0;
   }
   </style>
 </head>
 <body>
 <h2>margin 重叠</h2>
 <h3>相邻兄弟元素重叠</h3>
-<div class="margin">
-  <div class="margin-item"></div>
-  <div class="margin-item"></div>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green"></div>
 </div>
-<div class="margin">
-  <div class="margin-item"></div>
-  <div  style="overflow: hidden">
-    <div class="margin-item"></div>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="display: inline-block">inline-block</div>
+</div>
+<div class="BFC relative">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="position:absolute;">absolute</div>
+</div>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="float: left;">float</div>
+</div>
+<h3>脱离文档流的重叠</h3>
+<div class="BFC relative">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="position:absolute;">absolute</div>
+  <div class="middle-box margin blue"></div>
+</div>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="float: left">float</div>
+  <div class="middle-box margin blue"></div>
+</div>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="float: left">float</div>
+  <div class="middle-box margin blue" style="clear: both;"></div>
+</div>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div class="middle-box margin green" style="float: left">float</div>
+  <div class="BFC"  style="clear: both;">
+    <div class="middle-box margin blue"></div>
   </div>
 </div>
-<div class="margin">
-  <div class="margin-item"></div>
-  <div class="margin-item"></div>
+<h4>设置BFC</h4>
+<div class="BFC">
+  <div class="middle-box margin red"></div>
+  <div  class="BFC">
+    <div class="middle-box margin green"></div>
+  </div>
 </div>
-<h3></h3>
+
+<h3>父元素与第一个/最后一个子元素重叠</h3>
+<div class="BFC">
+  <div class="big-box margin green">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="big-box margin green" style="padding: 10px">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="big-box margin green" style="border: 1px solid;">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="big-box margin green before">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="auto-box margin green">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="auto-box margin green" style="border: 10px solid;">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="auto-box margin green" style="min-height: 100px">
+    <div class="middle-box margin red"></div>
+  </div>
+</div>
+<div class="BFC">
+  <div class="margin red none"></div>
+</div>
+<br><br><br>
 </body>
 </html>
