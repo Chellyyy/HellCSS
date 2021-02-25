@@ -200,3 +200,10 @@ AJAX 请求跨域日常使用比较多，常用的方法有以下几种
   不难发现的是，设置 hash 和 postMessage 都是通过设置一个监听函数来实现的，所以我们是异步获取数据的。  
   而设置 window.name 虽然是在 iframe.onload 事件中获取的，但是本质上是在等待 iframe 的加载，确保数据已经设置成功。  
   这里还有值得思考的地方。
+
+## 参考资料
+[浏览器同源政策及其规避方法](http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)  
+[浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)  
+[window.postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)  
+[跨源资源共享（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)  
+[前端常见跨域解决方案（全）](https://segmentfault.com/a/1190000011145364)
