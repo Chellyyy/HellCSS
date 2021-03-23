@@ -31,6 +31,9 @@
 ### 1、读取 Cookie
 
 cookie 的读取与其他属性有些不同。因为 cookie 的可见性是由 domain 属性和 path 属性决定的，所以他其实不受协议和端口的限制。只要是同一个 domain 和可见 path 下的 cookie，都能读取到。
+举个例子：sub.test.com 和 test.com 两个网站，他们是子域和主域的关系。  
+在不设置 domain 的情况下设置 cookie 时，sub.test.com 的默认 domain 就是 sub.test.com，test.com 的默认 domain 就是 test.com，所以他们的 cookie 不能互相读取。但是你可以将 cookie 的 domain 设为 .test.com，这样主域和子域的 cookie 就能互相读取。  
+这里有一个疑问，当我将 sub.test.com 的 domain 设置成 test.com，设置不设 domain 的 cookie 的 domain 仍是 sub.test.com。
 
 #### 可见 path
 
@@ -83,6 +86,7 @@ localStorage、IndexedDB 和 DOM 是实实在在受同源策略限制的，协�
 - fragment identifier 片段标识符  
   fragment identifier 其实就是 url # 后面的部分。常写 SPA 应用的小伙伴应该会对他很熟悉，因为 hash 模式的 router 就是基于他实现的。修改嵌入的 iframe 的 src 为 url#需要传递的数据，iframe 页面就能通过监听 hashchange 事件获得传递的数据。如果是子页面向父页面传递数据要多加一步，得先让父页面把自己当前的 url 传递给子页面，然后子页面去修改父页面的 href。  
   使用这个方法传递数据的限制暂时还未测试，猜测应该会和浏览器限制 url 的长度有关。
+
   ```
   //父->子 a页面
   var iframe = document.createElement("iframe");
@@ -122,21 +126,23 @@ localStorage、IndexedDB 和 DOM 是实实在在受同源策略限制的，协�
 
 - postMessage  
   严格意义上来说上面两种方法都是对跨域页面获取数据的破解，postMessage 才是正统的非同源页面之间传递数据的方法。
+
   > window.postMessage() 方法提供了一种受控机制来规避此限制，只要正确的使用，这种方法就很安全。
-  
+
   postMessage 是新增的 API，使用前记得查看一下兼容性。
-  使用上需要注意的就是调用 postMessage 和监听 message 事件的的主体是同一个。也就是说子页面向父页面发送消息时，需要获取 window.parent 去调用 postMessage。父页面向子页面发送消息时，可以直接获取 iframe，然后调用 postMessage。  
-  > postMessage((message, targetOrigin, [transfer]); 
-   message  
-   将要发送到其他 window 的数据。它将会被结构化克隆算法序列化。这意味着你可以不受什么限制的将数据对象安全的传送给目标窗口而无需自己序列化。  
-   targetOrigin  
-   通过窗口的 origin 属性来指定哪些窗口能接收到消息事件，其值可以是字符串"*"（表示无限制）或者一个 URI。  
-   在发送消息的时候，如果目标窗口的协议、主机地址或端口这三者的任意一项不匹配 targetOrigin 提供的值，那么消息就不会被发送；只有三者完全匹配，消息才会被发送。  
-   这个机制用来控制消息可以发送到哪些窗口；例如，当用 postMessage 传送密码时，这个参数就显得尤为重要，必须保证它的值与这条包含密码的信息的预期接受者的 origin 属性完全一致，来防止密码被恶意的第三方截获。  
-   如果你明确的知道消息应该发送到哪个窗口，那么请始终提供一个有确切值的 targetOrigin，而不是*。不提供确切的目标将导致数据泄露到任何对数据感兴趣的恶意站点。  
-   transfer 可选  
-   是一串和message 同时传递的 Transferable 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权 
- 
+  使用上需要注意的就是调用 postMessage 和监听 message 事件的的主体是同一个。也就是说子页面向父页面发送消息时，需要获取 window.parent 去调用 postMessage。父页面向子页面发送消息时，可以直接获取 iframe，然后调用 postMessage。
+
+  > postMessage((message, targetOrigin, [transfer]);
+  > message  
+  >  将要发送到其他 window 的数据。它将会被结构化克隆算法序列化。这意味着你可以不受什么限制的将数据对象安全的传送给目标窗口而无需自己序列化。  
+  >  targetOrigin  
+  >  通过窗口的 origin 属性来指定哪些窗口能接收到消息事件，其值可以是字符串"_"（表示无限制）或者一个 URI。  
+  >  在发送消息的时候，如果目标窗口的协议、主机地址或端口这三者的任意一项不匹配 targetOrigin 提供的值，那么消息就不会被发送；只有三者完全匹配，消息才会被发送。  
+  >  这个机制用来控制消息可以发送到哪些窗口；例如，当用 postMessage 传送密码时，这个参数就显得尤为重要，必须保证它的值与这条包含密码的信息的预期接受者的 origin 属性完全一致，来防止密码被恶意的第三方截获。  
+  >  如果你明确的知道消息应该发送到哪个窗口，那么请始终提供一个有确切值的 targetOrigin，而不是_。不提供确切的目标将导致数据泄露到任何对数据感兴趣的恶意站点。  
+  >  transfer 可选  
+  >  是一串和 message 同时传递的 Transferable 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权
+
   下面这个示例是子页面向父页面发送消息。
 
   ```
@@ -152,7 +158,6 @@ localStorage、IndexedDB 和 DOM 是实实在在受同源策略限制的，协�
   }, "*")
 
   ```
-  
 
 - 另外特别需要注意的是关于 DOM 的获取，如果只是两个不同子域的页面，将 document.domain 设置为同一主域就可以读取相应数据。
 
@@ -177,8 +182,10 @@ localStorage、IndexedDB 和 DOM 是实实在在受同源策略限制的，协�
   // domain 设置为主域
   document.domain = "test.com";
   ```
+
 ### 3、AJAX 请求
-AJAX 请求跨域日常使用比较多，常用的方法有以下几种  
+
+AJAX 请求跨域日常使用比较多，常用的方法有以下几种
 
 - JSONP  
   这个方法是向服务器请求的时候，在 url 后面写上 callback 方法的名字，请求返回实际上是返回了一个 调用 callback 方法的 js 文件。需要返回的参数也就在调用的时候传进去了。  
@@ -194,14 +201,16 @@ AJAX 请求跨域日常使用比较多，常用的方法有以下几种
   这样前端就能正常获取到数据啦。  
   这里只对 CORS 做了一个简单介绍，详细的下次细说吧。
 
-总结：  
-- 读取跨域的 cookie 需要设置 path 和 domain  
+总结：
+
+- 读取跨域的 cookie 需要设置 path 和 domain
 - 不同源页面间通讯可以通过设置 window.name、location 的 hash 值和 postMessage 来实现。  
   不难发现的是，设置 hash 和 postMessage 都是通过设置一个监听函数来实现的，所以我们是异步获取数据的。  
   而设置 window.name 虽然是在 iframe.onload 事件中获取的，但是本质上是在等待 iframe 的加载，确保数据已经设置成功。  
   这里还有值得思考的地方。
 
 ## 参考资料
+
 [浏览器同源政策及其规避方法](http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)  
 [浏览器的同源策略](https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy)  
 [window.postMessage](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage)  
